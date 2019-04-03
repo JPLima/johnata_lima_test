@@ -1,0 +1,34 @@
+<html>
+   <body>
+      <div>
+<form action = "http://" method = "POST" id="form1">
+            <p> Name<input type = "text" name = "name" /></p>
+            <p>Favorite Color <input type = "text" name = "color" /></p>
+            <p>Animal 
+               <select name ="animal" form="form1" >
+                  <option value="cat" name="cat">Cat</option>
+                  <option value="dog" name="dog">Dog</option>
+                  </select>
+            </p>
+            <input type = "submit" value = "submit" />
+         </form>
+         <table border = 1>
+                  <tr>
+                     <th>Name</th>
+                     <th>Color</th>                    
+                     <th>Animal</th> 
+                  </tr>
+                  {% for row in student %}
+                  <tr>
+                    <td>{{ row[0] }}</td>
+                    <td>{{ row[1] }}</td>
+                    <td>{{ row[2] }}</td>
+
+                  </tr>
+                {% endfor %}
+
+         </table>
+      </div>
+   </body>
+</html>
+

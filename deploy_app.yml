@@ -1,0 +1,31 @@
+- hosts: all
+  become: true
+  tasks:
+  - name: Send application files do the server
+    copy:
+      dest: /tmp
+      src: ./
+      owner: ec2-user
+      group: ec2-user
+
+  - name: install python3
+    yum: 
+      name: 
+        - python36
+        - python36-pip
+      state: present
+      update_cache: yes
+  
+  - name: install app dependencies 
+    command: pip-3.6 install -r /tmp/requeriments.txt
+
+  - name: Create application table on RDS
+    command: nohup python3 /tmp/mysql_prep.py > /dev/null
+
+  - name: Run de application
+    command: bash -c " nohup python3 /tmp/app.py &"
+
+  
+  
+
+ 
