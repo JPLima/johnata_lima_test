@@ -1,29 +1,29 @@
-# challenge
-This simple project buil an application and deploy on aws
-there are three playbook to ruim
-<p><b>#1</b> - create_infra.yml, create the network enviroment(VPC,SG, LB, IGW...) and deploy the EC2 instance </p>
-<p><b>#2</b> - create_rds.yml, create a RDS MySQL Instance and generate de credentials.json file </p>
-<p><b>#3</b> - deploy_app.yml, move the files with the application and run it. Install de requeriments too</p>
+# The Application 
 
-<h1> The Application</h1>
-<h2> How to deploy</h2>
-<h2> Pre installation </h2>
-To run the deploy you need install some requeriments, follow below the commands:
-   <p> Install ansible with python3</p>
-        $sudo python3 pip install ansible 
-    <p>Install boto and boto3</p>
-        <p>$sudo pip3 install boto</p>
-        <p>$sudo pip3 install boto3</p>
+<h2>Before start deploy</h2>
+Before start to running the application you need install some things. Follow bellow the commands:
+<b>Ansible using Python3</b>
+<p><b>$</b>sudo python3 pip install ansible</p>
+<p><b>Install boto and boto3</b></p>
+<p>$sudo pip3 install boto</p>
+<p>$sudo pip3 install boto3</p>
+<p><b>You need to create the file ~/.aws/credentials or set aws_secret_access_key and aws_access_key_id</b></p>
 
-<h1>Deploy</h1>
-<h2>The deployment from this application is divided in three steps:</h2>
-    <p><b>Step 1</b> Run ansible-playbook to create de infrastructure </p>
-            $ansible-playbook create_infra.yml
-            <p>Here, the playbook will edit the ./file/template/index.html to put the load balancer public DNS and the host.txt file with the user and public name from EC2</p>
-    <p><b>Step 2</b> Run playbook to deploy the RDS</p>
-            $ansible-playbook create_rds.yml
-            <p>At this point, the playbook will create the credentials.json file and send to ./file folder</p>
-    <p><b>Step 3</b> Run playbook to install dependecies and run the application</p>
-            $ansible-playbook -i host.txt deploy_app.yml
+<h2>Playbooks</h2>
+<p>The project is divided in two playbooks that calls task in the folder task/</p>
+<h3>Infrasctructure</h2>
+<p>The first playbook that must to be deployed to create the infrastructure from the application is main.yml</p>
+The <b>main.yml</b> playbook import tasks network.yml, rds.yml and instances.yml
+<b>network.yml</b> - Must be deployed first at all. This task will create all network enviromment on aws(VPC,SG, LB, IGW) and create the <i>infonetwork.json</i> the save necessary network information to other deploy without the need to run it again. 
+<b>rds.yml</b> - It will create the subnet_group to RDS and the RDS instance. Get credentials from ./files/credentials.json that must to be set before run the playbook.
+<b>instances.yml</b> - This playbook generete the key pair to access the ec2 instance and create the VM, also add the instance to host.txt file(if not exist, it will be created) and save the access key if does not exist. 
 
-<p><h2>You need to create the file ~/.aws/credentials or set aws_secret_access_key  and aws_access_key_id</h2></p>
+<h3>Application</h3>
+The application's playbook is deploy_app.yml that import the installreq.yml, createdb.yml and app.yml
+<p><b>installreq.ym</b> - This task install all dependences that the application require.</p>
+<p><b>createdb.ym</b> -  Create the database "demo" on RDS. This task can only be deployed from the VM because there is no external access to RDS.
+<p><b>app.yml</b> - This is the task that run the application flask. </p>
+
+<h2>Run the playbooks</h2>
+
+
