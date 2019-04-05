@@ -1,0 +1,5 @@
+- name: Create application table on RDS
+  command: nohup python3 /tmp/mysql_prep.py > /dev/null
+
+- name: Run de application
+  command: bash -c " nohup python3 /tmp/app.py &"

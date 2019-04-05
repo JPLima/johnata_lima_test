@@ -1,0 +1,9 @@
+- name: Create a new database for the application
+  mysql_db:
+    name: demo
+    state: present
+    login_host: "{{ dbcredentials.dbhost }}"
+    login_password: "{{ dbcredentials.dbpass }}"
+    login_user: "{{ dbcredentials.dbuser }}"
+  register: dbcredentials
+- debug: var=dbcredentiasl

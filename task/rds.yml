@@ -1,0 +1,39 @@
+
+- name: Create RDS subnet group 
+  rds_subnet_group:
+    state: present
+    region: us-east-1
+    name: demo-subnet-group
+    description: subnet group
+    subnets: 
+      - "{{ infonetworks.subnetid1 }}"
+      - "{{ infonetworks.subnetid2 }}"
+  register: sggroup
+- debug: var=sggroup
+
+- name: create Mysql RDS instance 
+  rds_instance:
+    region: us-east-1
+    vpc_security_group_ids: "{{ infonetworks.nsg_id }}"
+    subnet_group: "{{  sggroup.subnet_group.name  }}"
+    engine: MySQL
+    db_instance_identifier: demo
+    instance_type: db.t2.small
+    password: "{{ dbcredentials.dbpass }}"
+    username: "{{ dbcredentials.dbuser }}"
+    allocated_storage: 20
+  register: rds
+#- debug: var=rds
+
+- name: Save RDS access to  ./files/credentials.json
+  copy: 
+    dest: ./files/credentials.json 
+    content: |
+      {
+        "dbhost": "{{ rds.endpoint.address }}",
+        "dbpass": "{{ dbcredentials.dbpass }}",
+        "dbuser": "{{ dbcredentials.dbuser }}",
+        "dbport": 3306,
+        "dbname": "{{ dbcredentials.dbname }}"
+      }
+

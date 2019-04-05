@@ -1,0 +1,1 @@
+{"subnetid2": "subnet-0322b8e6df8edfba8", "apigw_id": "igw-072b03be2bb26a6fb", "lb_dns": "load-balancer-1004501900.us-east-1.elb.amazonaws.com", "nsg_id": "sg-0e9b3db50eee4ffea", "elb_name": "load-balancer", "vpc_id": "vpc-03da5a36d70d0fd89", "subnetid1": "subnet-059b397dae4f34622"}

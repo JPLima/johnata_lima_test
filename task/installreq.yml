@@ -1,0 +1,27 @@
+- name: Send application files do the server
+  copy:
+    dest: /tmp
+    src: ./
+    owner: ec2-user
+    group: ec2-user
+- name: Alter html page index to listener on LB public dns
+  lineinfile:
+    regexp: <form action = "http://" method = "POST" id="form1">
+    dest: /tmp/templates/index.html
+    line: <form action = "http://{{  infonetworks.lb_dns }}/result" method = "POST" id="form1">
+    state: present
+  
+- name: install python3
+  yum: 
+    name: 
+      - python36
+      - python36-pip
+    state: present
+    update_cache: yes
+
+- name: install app dependencies to python3
+  command: pip-3.6 install -r /tmp/requeriments.txt
+
+- name: install app dependencies to python2 
+  command: pip install -r /tmp/requeriments.txt
+

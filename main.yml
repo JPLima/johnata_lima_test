@@ -1,0 +1,11 @@
+
+ - hosts: localhost
+   vars:
+    dbcredentials: "{{  lookup('file', './files/credentials.json') | from_json  }}"
+    infonetworks: "{{  lookup('file', './infonetwork.json') | from_json  }}"   
+   tasks:
+ #    - include: ./task/network.yml
+     - include: ./task/instances.yml
+ #    - include: ./task/rds.yml
+
+ 
