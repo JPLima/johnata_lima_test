@@ -5,7 +5,8 @@
     infonetworks: "{{  lookup('file', './infonetwork.json') | from_json  }}"   
    tasks:
  #    - include: ./task/network.yml
-     - include: ./task/instances.yml
  #    - include: ./task/rds.yml
+      - include: ./task/instances.yml
+ 
 
  
