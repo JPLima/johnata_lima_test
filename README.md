@@ -2,7 +2,7 @@
 
 <h2>Before start deploy</h2>
 Before start to running the application you need install some things. Follow bellow the commands:
-<b>Ansible using Python3</b>
+<p><b>Ansible using Python3</b></p>
 <p><b>$</b>sudo python3 pip install ansible</p>
 <p><b>Install boto and boto3</b></p>
 <p>$sudo pip3 install boto</p>
@@ -13,10 +13,10 @@ Before start to running the application you need install some things. Follow bel
 <p>The project is divided in two playbooks that calls task in the folder task/</p>
 <h3>Infrasctructure</h2>
 <p>The first playbook that must to be deployed to create the infrastructure from the application is main.yml</p>
-The <b>main.yml</b> playbook import tasks network.yml, rds.yml and instances.yml
-<b>network.yml</b> - Must be deployed first at all. This task will create all network enviromment on aws(VPC,SG, LB, IGW) and create the <i>infonetwork.json</i> the save necessary network information to other deploy without the need to run it again. 
-<b>rds.yml</b> - It will create the subnet_group to RDS and the RDS instance. Get credentials from ./files/credentials.json that must to be set before run the playbook.
-<b>instances.yml</b> - This playbook generete the key pair to access the ec2 instance and create the VM, also add the instance to host.txt file(if not exist, it will be created) and save the access key if does not exist. 
+<p>The <b>main.yml</b> playbook import tasks network.yml, rds.yml and instances.yml<p>
+<p><b>network.yml</b> - Must be deployed first at all. This task will create all network enviromment on aws(VPC,SG, LB, IGW) and create the <i>infonetwork.json</i> the save necessary network information to other deploy without the need to run it again. </p>
+<p><b>rds.yml</b> - It will create the subnet_group to RDS and the RDS instance. Get credentials from ./files/credentials.json that must to be set before run the playbook.</p>
+<p><b>instances.yml</b> - This playbook generete the key pair to access the ec2 instance and create the VM, also add the instance to host.txt file(if not exist, it will be created) and save the access key if does not exist. </p>
 
 <h3>Application</h3>
 The application's playbook is deploy_app.yml that import the installreq.yml, createdb.yml and app.yml
@@ -25,5 +25,7 @@ The application's playbook is deploy_app.yml that import the installreq.yml, cre
 <p><b>app.yml</b> - This is the task that run the application flask. </p>
 
 <h2>Run the playbooks</h2>
-
+<p>To run the playbooks is just:</p>
+<p>ansible-playbook main.yml</p>
+<p>ansible-playbook -i host.txt deploy_app.yml</p>
 
