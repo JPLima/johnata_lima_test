@@ -29,6 +29,7 @@ The application's playbook is deploy_app.yml that import the installreq.yml, cre
 <p>ansible-playbook main.yml</p>
 <p>ansible-playbook -i host.txt deploy_app.yml</p>
 <h5>To add a new EC2 edit the main.yml file and comment the lines - include: ./task/network.yml  - include: ./task/rds.yml  and run it again, after finish run the deploy_app.yml playbook.</h5>
+<h5>You can also change the instance type to scale UP the application</h5>
 
 
 
