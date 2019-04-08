@@ -25,7 +25,7 @@ The application's playbook is deploy_app.yml that import the installreq.yml, cre
 <p><b>app.yml</b> - This is the task that run the application flask. </p>
 
 <h2>Run the playbooks</h2>
-<p>To run the playbooks is just need to add a password on files/credentials.json and run the commands below:</p>
+<p>To run the playbooks is just need to add a password on <b>files/credentials.json</b> and run the commands below:</p>
 <p>ansible-playbook main.yml</p>
 <p>ansible-playbook -i host.txt deploy_app.yml</p>
 <h5>To add a new EC2 edit the main.yml file and comment the lines - include: ./task/network.yml  - include: ./task/rds.yml  and run it again, after finish run the deploy_app.yml playbook.</h5>
