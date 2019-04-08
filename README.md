@@ -1,9 +1,9 @@
 # The Application 
 
 <h2>Before start deploy</h2>
-Before start to running the application you need install some things. Follow bellow the commands:
+Before start to running the application you need install some things. Follow bellow the commands(This work for ubuntu16.4):
 <p><b>Ansible using Python3</b></p>
-<p><b>$</b>sudo python3 pip install ansible</p>
+<p><b>$</b>sudo pip3 install ansible</p>
 <p><b>Install boto and boto3</b></p>
 <p>$sudo pip3 install boto</p>
 <p>$sudo pip3 install boto3</p>
@@ -25,7 +25,7 @@ The application's playbook is deploy_app.yml that import the installreq.yml, cre
 <p><b>app.yml</b> - This is the task that run the application flask. </p>
 
 <h2>Run the playbooks</h2>
-<p>To run the playbooks is just:</p>
+<p>To run the playbooks is just need to add a password on files/credentials.json and run the commands below:</p>
 <p>ansible-playbook main.yml</p>
 <p>ansible-playbook -i host.txt deploy_app.yml</p>
 <h5>To add a new EC2 edit the main.yml file and comment the lines - include: ./task/network.yml  - include: ./task/rds.yml  and run it again, after finish run the deploy_app.yml playbook.</h5>

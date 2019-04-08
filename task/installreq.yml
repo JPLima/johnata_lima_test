@@ -1,7 +1,7 @@
 - name: Send application files do the server
   copy:
     dest: /tmp
-    src: ./
+    src: ./files/
     owner: ec2-user
     group: ec2-user
 - name: Alter html page index to listener on LB public dns

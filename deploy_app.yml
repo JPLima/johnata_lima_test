@@ -1,7 +1,7 @@
 - hosts: all
   become: true
   vars:
-    dbcredentials: "{{  lookup('file', '/tmp/credentials.json') | from_json  }}"
+    dbcredentials: "{{  lookup('file', './files/credentials.json') | from_json  }}"
     infonetworks: "{{  lookup('file', './infonetwork.json') | from_json  }}"   
 
   tasks:
